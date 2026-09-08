@@ -15,4 +15,24 @@ class Aluno extends Model
         'curso',
         'data_nascimento',
     ];
+
+    public static function porCurso($curso)
+    {
+        return self::where('curso', $curso)->get();
+    }
+
+    public static function comNomeContendo($palavra)
+    {
+        return self::where('nome', 'like', '%' . $palavra . '%')->get();
+    }
+
+    public static function cadastradosRecentemente()
+    {
+        return self::orderBy('created_at', 'desc')->take(10)->get();
+    }
+
+    public static function quantidadeTotal()
+    {
+        return self::count();
+    }
 }
